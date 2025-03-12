@@ -1,9 +1,19 @@
 import streamlit as st
 import joblib
 import pandas as pd
+import os
 
-rf_model = joblib.load(r"C:\Users\Dell\Desktop\company work\random_forest_model.pkl")
-scaler = joblib.load(r"C:\Users\Dell\Desktop\company work\scaler.pkl")
+model_path = os.path.join(os.path.dirname(__file__), r"C:\Users\Dell\Desktop\company work\random_forest_model.pkl")
+model1_path = os.path.join(os.path.dirname(__file__), r"C:\Users\Dell\Desktop\company work\scaler.pkl")
+
+if not os.path.exists(model_path):
+    raise FileNotFoundError(f"Model file not found: {model_path}")
+
+if not os.path.exists(model1_path):
+    raise FileNotFoundError(f"Scaler file not found: {model1_path}")
+
+rf_model = joblib.load(model_path)
+scaler = joblib.load(model1_path)
 
 st.title("NEET 2024 Marks vs Rank Predictor")
 
